@@ -22,6 +22,7 @@ script:
 - travis_wait 30 gclient sync
 # patch webrtc compiler option for armv6
 - sed -e 's|"-mfpu=$arm_fpu"|"-mfpu=$arm_fpu","-marm","-DPFFFT_SIMD_DISABLE=1"|' -i src/build/config/compiler/BUILD.gn
+- cd src && build/install-build-deps.sh && gn gen out/arm64 --args='target_os="linux" target_cpu="arm64" is_debug=false' && ninja -C out/arm64
 - popd
 # build
 - echo CMAKE_OPTIONS=${CMAKE_OPTIONS}
@@ -29,23 +30,6 @@ script:
 before_deploy:
 - export RELEASE_PKG_FILE=$(ls *.tar.gz)
 - echo "RELEASE_PKG_FILE=${RELEASE_PKG_FILE}"   
-#deploy:
-#- provider: heroku
-#  skip_cleanup: true
-#  api_key:
-#    secure: NmTNf38MkoWWQZrRkXyWqCdRRO4Xjv+Kl0TOZPw+qCXva4kc2T0uwSi2o4YNZBUA533NyZvO6IJMQOpx24UkjPhxVv591FBB+HdUevOxD4SEAE8fBibpHVX3sTU0XLp/mx+BpNFdxKrEHHzoyBZBFjesQVVMVczB4AOv/KZerGw=
-#  on:
-#    repo: mpromonet/webrtc-streamer
-#    condition: $GYP_GENERATOR_OUTPUT = x86_64
-#- provider: releases
-#  skip_cleanup: true
-#  api_key:
-#    secure: FMXzmhBmuy7Jou3h5lG10b8xl5oqI96aYoUrUHO2rfKqQ4UMKxT3hXcdxOnSsnbI6d8NfXbOPKqmqmD4vTk+EqQjCK9fmsNxAg1UktLIsuOxoWmEWYLK5d3xpIuRmfRQDtPVjcryrE420FCfZS67lyr22+v1pLcvcD61ebGZLCg=
-#  file: 
-#  - "${RELEASE_PKG_FILE}"
-#  on:
-#    repo: mpromonet/webrtc-streamer
-#    tags: true
 
 deploy:
   provider: pages
