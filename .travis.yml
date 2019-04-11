@@ -19,7 +19,11 @@ script:
 - travis_wait 30 gclient sync
 # patch webrtc compiler option for armv6
 - sed -e 's|"-mfpu=$arm_fpu"|"-mfpu=$arm_fpu","-marm","-DPFFFT_SIMD_DISABLE=1"|' -i src/build/config/compiler/BUILD.gn
-- cd src && build/install-build-deps.sh && gn gen out/arm64 --args='target_os="linux" target_cpu="arm64" is_debug=false' && ninja -C out/arm64
+- pushd src
+- sudo build/install-build-deps.sh
+- sudo gn gen out/arm64 --args='target_os="linux" target_cpu="arm64" is_debug=false'
+- sudo ninja -C out/arm64
+- popd
 - popd
 # build
 - echo CMAKE_OPTIONS=-DCMAKE_SYSTEM_PROCESSOR=armv7l -DCMAKE_SYSTEM_NAME=Linux -DCMAKE_C_COMPILER=aarch64-linux-gnu-gcc -DCMAKE_CXX_COMPILER=aarch64-linux-gnu-g++ -DCMAKE_FIND_ROOT_PATH_MODE_PROGRAM=NEVER -DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY -DCMAKE_FIND_ROOT_PATH_MODE_LIBRARY=ONLY -DCMAKE_FIND_ROOT_PATH_MODE_PACKAGE=ONLY -DWEBRTCDESKTOPCAPTURE=OFF
