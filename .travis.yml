@@ -16,7 +16,8 @@ script:
 # get arm sysroot
 - src/build/linux/sysroot_scripts/install-sysroot.py --arch=arm64
 # get WebRTC dependencies
-- travis_wait 30 gclient sync
+# travis_wait 30 gclient sync
+- gclient sync
 # patch webrtc compiler option for armv6
 - sed -e 's|"-mfpu=$arm_fpu"|"-mfpu=$arm_fpu","-marm","-DPFFFT_SIMD_DISABLE=1"|' -i src/build/config/compiler/BUILD.gn
 - pushd src
