@@ -1,4 +1,4 @@
-[![TravisCI](https://travis-ci.org/mpromonet/webrtc-streamer.png)](https://travis-ci.org/mpromonet/webrtc-streamer)
+[![TravisCI](https://travis-ci.org/mpromonet/webrtc-streamer.png)](https://travis-ci.org/frogkind/webrtc-streamer)
 [![CircleCI](https://circleci.com/gh/mpromonet/webrtc-streamer.svg?style=shield)](https://circleci.com/gh/mpromonet/webrtc-streamer)
 [![Appveyor](https://ci.appveyor.com/api/projects/status/github/mpromonet/webrtc-streamer?branch=master&svg=true)](https://ci.appveyor.com/project/mpromonet/webrtc-streamer/build/artifacts)
 [![CirusCI](https://api.cirrus-ci.com/github/mpromonet/webrtc-streamer.svg)](https://cirrus-ci.com/github/mpromonet/webrtc-streamer)
