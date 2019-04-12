@@ -17,6 +17,7 @@ script:
 - src/build/linux/sysroot_scripts/install-sysroot.py --arch=arm64
 # get WebRTC dependencies
 - cd src && sudo ./build/install-build-deps.sh
+- gclient runhooks
 # travis_wait 30 gclient sync
 - gclient sync
 # patch webrtc compiler option for armv6
