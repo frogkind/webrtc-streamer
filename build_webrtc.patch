@@ -1,0 +1,12 @@
+--- ./build/install-build-deps.sh       2019-04-12 11:58:05.834614126 +0800
++++ ./build/install-build-deps.sh       2019-04-12 12:03:10.068254227 +0800
+@@ -626,7 +626,8 @@
+ echo "Packages required: " $packages
+ echo
+ query_cmd="apt-get --just-print install $(echo $packages)"
+-if cmd_output="$(LANGUAGE=en LANG=C $query_cmd)"; then
++cmd_output="$(LANGUAGE=en LANG=C $query_cmd)";
++if true; then
+   new_list=$(echo "$cmd_output" |
+     sed -e '1,/The following NEW packages will be installed:/d;s/^  //;t;d' |
+     sed 's/ *$//')
