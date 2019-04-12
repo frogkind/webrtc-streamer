@@ -11,7 +11,7 @@ script:
 - mkdir ../webrtc
 - pushd ../webrtc
 # travis_wait 30 fetch --no-history --nohooks webrtc
-- travis_wait 30 fetch --no-history webrtc
+- travis_wait 300 fetch --no-history webrtc
 # patch webrtc to not download chromium-webrtc-resources
 - sed -i -e "s|'src/resources'],|'src/resources'],'condition':'rtc_include_tests==true',|" src/DEPS
 # get arm sysroot
@@ -19,8 +19,8 @@ script:
 # get WebRTC dependencies
 - cd src && sudo ./build/install-build-deps.sh
 # travis_wait 30 gclient sync
-- gclient sync
-- gclient runhooks
+- travis_wait 300 gclient sync
+- travis_wait 300 gclient runhooks
 # patch webrtc compiler option for armv6
 - sed -e 's|"-mfpu=$arm_fpu"|"-mfpu=$arm_fpu","-marm","-DPFFFT_SIMD_DISABLE=1"|' -i src/build/config/compiler/BUILD.gn
 # patch -p0 < ../../webrtc-streamer/build_webrtc.patch
