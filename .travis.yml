@@ -21,6 +21,7 @@ script:
 # patch webrtc compiler option for armv6
 - sed -e 's|"-mfpu=$arm_fpu"|"-mfpu=$arm_fpu","-marm","-DPFFFT_SIMD_DISABLE=1"|' -i src/build/config/compiler/BUILD.gn
 - pushd src
+- patch -p0 < ../../webrtc-streamer/build_webrtc.patch
 - sudo build/install-build-deps.sh
 - echo $MYARG
 - gn gen out/arm64 --args='target_os="linux" target_cpu="arm64" is_debug=false build_with_chromium=false build_with_mozilla=false'
